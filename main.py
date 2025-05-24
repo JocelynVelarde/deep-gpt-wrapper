@@ -7,7 +7,7 @@ from shapely.ops import unary_union
 
 st.title("This is our main page")
 
-m = leafmap.Map(center=[40, -100], zoom=6)
+m = leafmap.Map(center=[40, -100], zoom=6, draw_control=True)
 # # tiendas = "tiendas.csv"
 # # regions = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_regions.geojson"
 
@@ -67,7 +67,7 @@ for plaza in unique_plazas:
         color_column="Plaza",
         marker_colors=[color_map.get(plaza, "gray")],
         icon_names=[icon_map.get(plaza, "star")], # fallback rocket
-        max_cluster_radius=20
+        max_cluster_radius=40
     )
 m.add_legend(title="Plazas", legend_dict=color_map)
 m.to_streamlit()
