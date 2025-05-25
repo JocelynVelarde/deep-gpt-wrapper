@@ -18,6 +18,10 @@ lon = st.number_input("Longitud", value=-100.0, format="%.6f")
 predicted_sales = None
 predicted_category = None
 
+st.text("⭐ 1 = Debajo de expectativas")
+st.text("⭐ 2 = Cumple expectativas")
+st.text("⭐ 3 = Excelente")
+
 if st.button("Predecir ventas para esta ubicación"):
     try:
         predicted_category, predicted_sales, predicted_proba = safe_predict(lat, lon)
