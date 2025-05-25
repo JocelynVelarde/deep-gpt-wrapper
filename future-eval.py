@@ -4,11 +4,9 @@ import pandas as pd
 import geopandas as gpd
 import folium
 from geopy.distance import geodesic
-
-# OpenAI SDK (nuevo cliente)
+from model.create_model import safe_predict
 from openai import OpenAI
 
-# Inicializa cliente de OpenAI con tu clave secreta desde Streamlit
 client = OpenAI(api_key=st.secrets["OPEN_AI"])
 
 st.set_page_config(layout="wide")
@@ -17,18 +15,40 @@ st.title("Modelo Predictivo")
 lat = st.number_input("Latitud", value=25.0, format="%.6f")
 lon = st.number_input("Longitud", value=-100.0, format="%.6f")
 
+predicted_sales = None
+predicted_category = None
+
+if st.button("Predecir ventas para esta ubicación"):
+    try:
+        predicted_category, predicted_sales, predicted_proba = safe_predict(lat, lon)
+    except Exception as e:
+        st.error(f"Error en la predicción: {e}")
+        predicted_sales = None
+
+if predicted_sales is not None:
+    st.success(f"**Ventas predichas para esta ubicación:** ${predicted_sales:,.2f} (Categoría: {predicted_category})")
+
 @st.cache_data
 def load_data():
     return pd.read_csv("data/classi2.csv")
 
 df = load_data()
 
-# GPT function using new OpenAI SDK
-def gpt_comment(nombre, plaza, distancia):
+# GPT function using additional data
+def gpt_comment(tienda_row):
+    nombre = tienda_row.get("NOMBRE", f"Tienda {tienda_row['TIENDA_ID']}")
+    plaza = tienda_row.get("PLAZA", f"Plaza {tienda_row['PLAZA_CVE']}")
+    distancia = tienda_row["distance"]
+
     prompt = (
         f"Genera un breve comentario para una tienda llamada '{nombre}' ubicada en la plaza '{plaza}', "
-        f"a {distancia:.2f} km del punto seleccionado. El comentario debe ser útil y relevante para una decisión de negocio."
+        f"a {distancia:.2f} km del punto seleccionado. "
+        f"Tiene un entorno '{tienda_row['ENTORNO_DES']}', con un nivel socioeconómico '{tienda_row['NIVELSOCIOECONOMICO_DES']}', "
+        f"{tienda_row['MTS2VENTAS_NUM']} m² de ventas, {tienda_row['PUERTASREFRIG_NUM']} puertas de refrigeración, "
+        f"{tienda_row['CAJONESESTACIONAMIENTO_NUM']} cajones de estacionamiento. Segmento: {tienda_row['SEGMENTO_MAESTRO_DESC']}. "
+        f"Meta de venta: ${tienda_row['Meta_venta']}, desempeño actual: {tienda_row['PERFORMANCE_LABEL']}."
     )
+
     try:
         response = client.chat.completions.create(
             model="gpt-4.1",
@@ -36,7 +56,7 @@ def gpt_comment(nombre, plaza, distancia):
                 {"role": "system", "content": "Eres un asistente experto en análisis de ubicaciones comerciales."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=40,
+            max_tokens=60,
             temperature=0.7,
         )
         return response.choices[0].message.content.strip()
@@ -44,39 +64,28 @@ def gpt_comment(nombre, plaza, distancia):
         st.error(f"Error con OpenAI: {e}")
         return "Comentario no disponible."
 
-# Sidebar para las tiendas más cercanas
 left_col, right_col = st.columns([1, 3])
 
 with left_col:
-    st.header("Top 3 Stores")
-    
+    st.header("Top 3 sucursales cercanas al punto")
+
     # Calcular distancias
     df["distance"] = df.apply(
         lambda row: geodesic((lat, lon), (row["LATITUD_NUM"], row["LONGITUD_NUM"])).km, axis=1
     )
-    top5 = df.nsmallest(3, "distance")
-    
-    # Scroll de tarjetas
-    st.markdown(
-        """
-        <div style="max-height:400px; overflow-y:auto;">
-        """,
-        unsafe_allow_html=True
-    )
+    top3 = df.nsmallest(3, "distance")
 
-    for idx, row in top5.iterrows():
-        comment = gpt_comment(
-            row.get("NOMBRE", f"Nombre {idx+1}"),
-            row.get("PLAZA", f"Plaza {idx+1}"),
-            row["distance"]
-        )
+    st.markdown("<div style='max-height:400px; overflow-y:auto;'>", unsafe_allow_html=True)
+
+    for idx, row in top3.iterrows():
+        comment = gpt_comment(row)
         st.markdown(
             f"""
             <div style="border:1px solid #ccc; border-radius:8px; padding:10px; margin-bottom:10px;">
-                <h4>Store: {row.get('NOMBRE', f'Nombre {idx+1}')}</h4>
-                <b>Plaza:</b> {row.get('PLAZA', f'Plaza {idx+1}')}<br>
-                <b>Distance:</b> {row['distance']:.2f} km<br>
-                <i>Description: {comment}</i>
+                <h4>Tienda: {row.get('NOMBRE', f'Tienda {row["TIENDA_ID"]}')}</h4>
+                <b>Plaza:</b> {row.get('PLAZA', f'Plaza {row["PLAZA_CVE"]}')}<br>
+                <b>Distancia:</b> {row['distance']:.2f} km<br>
+                <i>Descripción: {comment}</i>
             </div>
             """,
             unsafe_allow_html=True
