@@ -1,0 +1,5 @@
+altair
+leafmap
+openai
+geopandas
+geopy
