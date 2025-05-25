@@ -40,5 +40,5 @@ Also, please note that this is a project built on top of Streamlit, and so you'l
 ## Contributors
 
 <a href="https://github.com/JocelynVelarde/deep-gpt-wrapper/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=JocelynVelarde/deep-gpt-wrapper" />
+  <img src="https://contrib.rocks/image?repo=JocelynVelarde/deep-gpt-wrapper " />
 </a>
