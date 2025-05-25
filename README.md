@@ -9,7 +9,16 @@ Oxxo is one of the most popular convenience stores in Mexico, they've recently f
 
 ## How does it work?
 
+### Results of Data Cleaning
 ![WhatsApp Image 2025-05-25 at 11 22 53](https://github.com/user-attachments/assets/7713a6bd-4814-430a-aa78-5e916080b4b3)
+
+### Correlation Matrix
+![image](https://github.com/user-attachments/assets/166af7e7-2094-4b56-8fd7-f4781d2f1a1f)
+
+### Sales Distribution by Performance Category
+![image](https://github.com/user-attachments/assets/5a82d5cc-f324-443a-a166-e313dc3f63ce)
+
+
 
 ## Our features
 - ✅ View heatmap of Oxxo stores in the Monterrey metropolitan area
