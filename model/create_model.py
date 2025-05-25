@@ -123,3 +123,9 @@ for category in category_models.keys():
         r2 = r2_score(y_cat, preds)
         rmse = np.sqrt(mean_squared_error(y_cat, preds))
         print(f"Category {category}: R² = {r2:.3f}, RMSE = ${rmse:,.2f}")
+
+import joblib
+
+# Load the classification pipeline
+joblib.dump(clf_pipeline, "classification_pipeline.pkl")
+joblib.dump(category_models, "all_regressors.pkl")
