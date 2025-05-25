@@ -18,7 +18,11 @@ Oxxo is one of the most popular convenience stores in Mexico, they've recently f
 ### Sales Distribution by Performance Category
 ![image](https://github.com/user-attachments/assets/5a82d5cc-f324-443a-a166-e313dc3f63ce)
 
-
+## Additional store reccommendation
+We used gpt-o3-mini model to reccommend between other Oxxo establishments with additional store insights
+- Bara
+- Caffenio
+- Yza Pharmacy
 
 ## Our features
 - ✅ View heatmap of Oxxo stores in the Monterrey metropolitan area
