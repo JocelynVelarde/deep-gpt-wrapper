@@ -86,7 +86,7 @@ with left_col:
 
 with right_col:
     m = leafmap.Map(center=[lat, lon], zoom=10, layers_control=False)
-    region_gdf = gpd.read_file("plazas.geojson")
+    region_gdf = gpd.read_file("data/plazas.geojson")
     all_plazas = ["1", "3", "4", "5", "6"]
     selected_plazas = st.multiselect("Mostrar plazas:", all_plazas, default=all_plazas)
 
