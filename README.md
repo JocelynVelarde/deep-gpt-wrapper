@@ -31,6 +31,8 @@ Oxxo is one of the most popular convenience stores in Mexico, they've recently f
 ### Feature Importances
 ![WhatsApp Image 2025-05-25 at 13 47 07](https://github.com/user-attachments/assets/589d4a4c-7092-4f98-b02b-9d9c10d481e3)
 
+### Accuracy: 86.3%
+
 ## Regression Model
 
 ### Confusion Matrix
@@ -38,6 +40,8 @@ Oxxo is one of the most popular convenience stores in Mexico, they've recently f
 
 ### Feature Importances
 ![Screenshot from 2025-05-25 14-01-10](https://github.com/user-attachments/assets/e6d8f2ec-dec0-49ed-a1ff-0a7e3f6ebfa6)
+
+### Accuracy: 45.5%
 
 ## Additional store reccommendation
 
