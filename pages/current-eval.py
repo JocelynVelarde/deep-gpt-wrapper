@@ -6,8 +6,8 @@ import plotly.express as px
 st.set_page_config(layout="wide")
 st.title("Current Statistics")
 
-df = pd.read_csv("classified.csv")
-vn = pd.read_csv("Venta.csv")
+df = pd.read_csv("data/classified.csv")
+vn = pd.read_csv("data/Venta.csv")
 # st.write("Preview of the data (temp for me)", df.head())
 
 top_n = df.nlargest(10, "AVG_VENTA_TOTAL")

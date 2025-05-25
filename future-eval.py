@@ -19,7 +19,7 @@ lon = st.number_input("Longitud", value=-100.0, format="%.6f")
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("classi2.csv")
+    return pd.read_csv("data/classi2.csv")
 
 df = load_data()
 
