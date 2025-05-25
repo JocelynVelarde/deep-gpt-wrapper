@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
 # 2. Load data
-df = pd.read_csv("dataset.csv")
+df = pd.read_csv("model/dataset.csv")
 
 # 3. Define features and targets
 X = df.drop(columns=["AVG_VENTA_TOTAL", "TIENDA_ID", "DATASET", "Meta_venta", "PERFORMANCE_LABEL"])

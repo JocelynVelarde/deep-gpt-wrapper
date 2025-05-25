@@ -3,3 +3,4 @@ leafmap
 openai
 geopandas
 geopy
+scikit-learn
