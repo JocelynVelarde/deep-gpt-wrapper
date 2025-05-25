@@ -47,7 +47,7 @@ def gpt_comment(tienda_row):
     prompt = (
         f"Genera un breve comentario para una tienda llamada '{nombre}' ubicada en la plaza '{plaza}', "
         f"a {distancia:.2f} km del punto seleccionado. "
-        f"Recomienda una tienda de esta listaa: Farmacia YZA, Tienda Bara, Caffenio"
+        f"Recomienda una tienda de esta lista y mencionala al inicio: Farmacia YZA, Tienda Bara, Caffenio"
         f"Tiene un entorno '{tienda_row['ENTORNO_DES']}', con un nivel socioeconómico '{tienda_row['NIVELSOCIOECONOMICO_DES']}', "
         f"{tienda_row['MTS2VENTAS_NUM']} m² de ventas, {tienda_row['PUERTASREFRIG_NUM']} puertas de refrigeración, "
         f"{tienda_row['CAJONESESTACIONAMIENTO_NUM']} cajones de estacionamiento. Segmento: {tienda_row['SEGMENTO_MAESTRO_DESC']}. "
