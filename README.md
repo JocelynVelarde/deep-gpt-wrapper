@@ -23,6 +23,26 @@ Oxxo is one of the most popular convenience stores in Mexico, they've recently f
 
 ![image](https://github.com/user-attachments/assets/5a82d5cc-f324-443a-a166-e313dc3f63ce)
 
+## Classifying Model
+
+### Confusion Matrix
+![WhatsApp Image 2025-05-25 at 13 46 54](https://github.com/user-attachments/assets/88458076-d19b-4d35-8ea4-97020e63b875)
+
+### Feature Importances
+![WhatsApp Image 2025-05-25 at 13 47 07](https://github.com/user-attachments/assets/589d4a4c-7092-4f98-b02b-9d9c10d481e3)
+
+### Accuracy: 86.3%
+
+## Regression Model
+
+### Confusion Matrix
+![Screenshot from 2025-05-25 14-00-55](https://github.com/user-attachments/assets/035f75b2-88c5-4f01-9728-827c09e548a7)
+
+### Feature Importances
+![Screenshot from 2025-05-25 14-01-10](https://github.com/user-attachments/assets/e6d8f2ec-dec0-49ed-a1ff-0a7e3f6ebfa6)
+
+### Accuracy: 45.5%
+
 ## Additional store reccommendation
 
 We used gpt-o3-mini model to reccommend between other Oxxo establishments with additional store insights
