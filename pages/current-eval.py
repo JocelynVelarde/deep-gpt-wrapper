@@ -1,3 +1,3 @@
-import sreeamlit as st
+import streamlit as st
 
 st.title("Current Evaluation")
